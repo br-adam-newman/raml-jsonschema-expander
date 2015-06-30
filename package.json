@@ -18,5 +18,7 @@
     }
   ],
   "main": "index.js",
-  "dependencies": {}
+  "dependencies": {
+    "urllib-sync"
+  }
 }
