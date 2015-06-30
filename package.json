@@ -1,6 +1,6 @@
 {
   "name": "raml-jsonschema-expander",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "A library that expands jsonschema refs for documentation",
   "author": {
     "name": "Adam Newman",
@@ -19,6 +19,6 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "urllib-sync"
+    "urllib-sync": "^1.1.0"
   }
 }
