@@ -1,0 +1,22 @@
+{
+  "name": "raml-jsonschema-expander",
+  "version": "1.0",
+  "description": "A library that expands jsonschema refs for documentation",
+  "author": {
+    "name": "Adam Newman",
+    "email": "adam.newman@bottlerocketstudios.com"
+  },
+  "keywords": [
+    "raml",
+    "jsonschema",
+    "raml2html"
+  ],
+  "contributors": [
+    {
+      "name": "Adam Newman",
+      "email": "adam.newman@bottlerocketstudios.com"
+    }
+  ],
+  "main": "index.js",
+  "dependencies": {}
+}
