@@ -1,10 +1,12 @@
 {
   "name": "raml-jsonschema-expander",
-  "version": "1.0.0",
-  "description": "A library that expands jsonschema refs for documentation",
+  "version": "1.0.1",
+  "description": "Expands JSON Schema draft 4 references from a RAML object created with raml2obj.",
+  "homepage": "https://github.com/br-adam-newman/raml-jsonschema-expander",
   "author": {
     "name": "Adam Newman",
-    "email": "adam.newman@bottlerocketstudios.com"
+    "email": "br-adam-newman@users.noreply.github.com",
+    "url": "https://github.com/br-adam-newman"
   },
   "keywords": [
     "raml",
@@ -14,10 +16,21 @@
   "contributors": [
     {
       "name": "Adam Newman",
-      "email": "adam.newman@bottlerocketstudios.com"
+      "email": "br-adam-newman@users.noreply.github.com"
     }
   ],
+  "license": {
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  },
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/br-adam-newman/raml-jsonschema-expander.git"
+  },
+  "engines": {
+    "node": ">=0.6.0"
+  },
   "dependencies": {
     "urllib-sync": "^1.1.0"
   }
