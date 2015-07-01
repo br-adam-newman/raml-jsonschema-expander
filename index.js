@@ -29,7 +29,7 @@ function fixSchemaNodes(node) {
     for (var keyIndex in keys) {
         var key = keys[keyIndex];
         var value = node[key];
-        if (key === "schema") {
+        if (key === "schema" && isJsonSchema(value)) {
             var schemaObj = JSON.parse(value);
             if (schemaObj.id && schemaObj.id in expandedSchemaCache) {
                 node[key] = JSON.stringify(expandedSchemaCache[schemaObj.id], null, 2);
@@ -54,7 +54,7 @@ function fixSchemaNodesInArray(value) {
 }
 
 function expandSchema(schemaText) {
-    if (schemaText.indexOf("$ref") > 0) {
+    if (schemaText.indexOf("$ref") > 0 && isJsonSchema(schemaText)) {
         var schemaObject = JSON.parse(schemaText);
         if (schemaObject.id) {
             var basePath = getBasePath(schemaObject.id);
@@ -150,6 +150,10 @@ function getBasePath(path) {
     var identityPath = path.split('/');
     identityPath.pop();
     return identityPath.join('/');
+}
+
+function isJsonSchema(schemaText) {
+    return (schemaText.indexOf("http://json-schema.org/draft-04/schema") > 0);
 }
 
 module.exports.expandJsonSchemas = expandJsonSchemas;
