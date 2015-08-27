@@ -80,9 +80,14 @@ function walkTree(basePath, node) {
         var key = keys[keyIndex];
         var value = node[key];
         if (key === "$ref") {
-            //Node has a ref, create expanded ref in its place.
-            expandedRef = expandRef(basePath, value);
-            delete node["$ref"];
+            if (value === "#") {
+                //Avoid recursively expanding
+                return node;
+            } else {
+                //Node has a ref, create expanded ref in its place.
+                expandedRef = expandRef(basePath, value);
+                delete node["$ref"];
+            }
         } else if (isObject(value)) {
             node[key] = walkTree(basePath, value);
         } else if (isArray(value)) {
