@@ -1,6 +1,7 @@
 'use strict';
 
 var urllibSync = require('urllib-sync');
+var fs = require('fs');
 
 var schemaHttpCache = {};
 var expandedSchemaCache = {};
@@ -124,13 +125,21 @@ function fetchRef(refUri) {
     if (refUri in schemaHttpCache) {
         return schemaHttpCache[refUri];
     } else {
-        var request = urllibSync.request;
-        var response = request(refUri, { timeout: 30000 });            
-        if (response.status == 200) {
-            schemaHttpCache[refUri] = response.data;
+        if (refUri.indexOf('http') > -1) {
+            var request = urllibSync.request;
+            var response = request(refUri, { timeout: 30000 });            
+            if (response.status == 200) {
+                schemaHttpCache[refUri] = response.data;
+            }
+            return response.data;
         }
-        return response.data;
+        else {
+            var body = fs.readFileSync(refUri).toString();
+            schemaHttpCache[refUri] = body;
+            return body;
+        }
     }
+    return false;
 }
 
 function walkArray(basePath, value) {
