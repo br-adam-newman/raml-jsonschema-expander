@@ -2,7 +2,7 @@ RAML JSON Schema Expander
 ============
 
 ### Purpose
-This library will expand JSON Schema draft 4 schema references in a ramlObject created by raml2obj. It was primarily created for use in raml2html so that schemas which reference other schemas will be expanded istead of leaving "$ref": "foo.json#". 
+This library will expand JSON Schema draft 4 schema references in a ramlObject created by raml2obj. It was primarily created for use in raml2html so that schemas which reference other schemas will be expanded instead of leaving "$ref": "foo.json#". 
 
 ### Usage
 Currently you will need to use my fork of raml2html. In the future it may be included with raml2html. 
@@ -55,3 +55,8 @@ Example file event.json:
           "eventEndDate": { "type": "string", "format": "iso8601" }
         }
     }
+    
+### Changelog
+*   1.1.0 - Added support for file:// URI with a relative or absolute path for id attribute.
+*   1.0.2 - Fixed recursive expansion bug
+*   1.0.1 - Initial release

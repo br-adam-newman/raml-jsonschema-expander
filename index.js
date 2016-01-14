@@ -6,6 +6,9 @@ var fs = require('fs');
 var schemaHttpCache = {};
 var expandedSchemaCache = {};
 
+var httpUriRegex = /^https?:\/\/.*/;
+var fileUriRegex = /^file:\/\/([^#]*)#?/;
+
 function expandJsonSchemas(ramlObj) {
     for (var schemaIndex in ramlObj.schemas) {
         var schema = ramlObj.schemas[schemaIndex];
@@ -122,24 +125,41 @@ function expandRef(basePath, value) {
 }
 
 function fetchRef(refUri) {
+    var result = null;
     if (refUri in schemaHttpCache) {
-        return schemaHttpCache[refUri];
+        result = schemaHttpCache[refUri];
     } else {
-        if (refUri.indexOf('http') > -1) {
+        if (httpUriRegex.test(refUri)) {
+            //Read from HTTP connection
             var request = urllibSync.request;
             var response = request(refUri, { timeout: 30000 });            
             if (response.status == 200) {
-                schemaHttpCache[refUri] = response.data;
+                result = response.data;
             }
-            return response.data;
+        } else {
+            //Assume raw file path
+            var filePath = refUri;
+            
+            //Check for file:// formatted URI
+            var fileRegexGroups = fileUriRegex.exec(refUri);
+            if (fileRegexGroups != null && fileRegexGroups.length == 2) {
+                filePath = fileUriRegex.exec(refUri)[1];
+            }
+            
+            //Read file from normalized path
+            result = fs.readFileSync(filePath).toString();
         }
-        else {
-            var body = fs.readFileSync(refUri).toString();
-            schemaHttpCache[refUri] = body;
-            return body;
+        
+        if (result != null) {
+            schemaHttpCache[refUri] = result;
         }
     }
-    return false;
+    
+    if (result == null) {
+        throw "fetchRef failed for URI:" + refUri;
+    }
+    
+    return result;
 }
 
 function walkArray(basePath, value) {
