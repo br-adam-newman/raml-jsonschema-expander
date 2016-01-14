@@ -59,11 +59,9 @@ Example file event.json:
 ### File System IDs
 With version 1.1.0 support has been added for the id attribute to be a relative or absolute file path. 
 
-        "id": 
-        "file://relative/path/to/resource.json#"
+        "id": "file://relative/path/to/resource.json#"
         //or
-        "id": 
-        "file:///absolute/path/to/resource.json#"
+        "id": "file:///absolute/path/to/resource.json#"
         //or
         "id": "/path/without/file/scheme/to/resource.json#"
         //or
