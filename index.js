@@ -58,6 +58,11 @@ function fixSchemaNodesInArray(value) {
 }
 
 function expandSchema(schemaText) {
+    // if we don't start with a string, we have to make it a string
+    // so {}.indexOf() doesn't make things blow up.
+    if (typeof SchemaText === 'object') {
+	schemaText = JSON.stringify(schemaText);
+    }
     if (schemaText.indexOf("$ref") > 0 && isJsonSchema(schemaText)) {
         var schemaObject = JSON.parse(schemaText);
         if (schemaObject.id) {
