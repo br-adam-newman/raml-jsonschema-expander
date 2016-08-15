@@ -70,6 +70,7 @@ With version 1.1.0 support has been added for the id attribute to be a relative 
 The file:// scheme out front makes it a URI. It will work without it, but it feels wrong. 
     
 ### Changelog
+*   1.1.1 - Handle String type mismatch. 
 *   1.1.0 - Added support for file:// URI with a relative or absolute path for id attribute.
 *   1.0.2 - Fixed recursive expansion bug
 *   1.0.1 - Initial release
