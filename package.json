@@ -1,6 +1,6 @@
 {
   "name": "raml-jsonschema-expander",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Expands JSON Schema draft 4 references from a RAML object created with raml2obj.",
   "homepage": "https://github.com/br-adam-newman/raml-jsonschema-expander",
   "author": {
