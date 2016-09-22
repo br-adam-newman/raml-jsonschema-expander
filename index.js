@@ -66,7 +66,7 @@ function expandSchema(schemaText, fakeRoot) {
     if (schemaText.indexOf("$ref") > 0 && isJsonSchema(schemaText)) {
         var schemaObject = JSON.parse(schemaText);
         if (schemaObject.id) {
-            var expandedSchema = walkTree(fakeRoot, schemaObject, fakeRoot);
+            var expandedSchema = walkTree(schemaObject, fakeRoot);
             expandedSchemaCache[schemaObject.id] = expandedSchema;
             return JSON.stringify(expandedSchema, null, 2);
         } else {
